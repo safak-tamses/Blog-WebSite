@@ -4,21 +4,25 @@
 
 ## Setting up the Backend Server (spring-social)
 
-+ **Create MySQL database**
-
-	```bash
-	mysql> create database spring_social
-	```
 
 + **Configure database username and password**
 
 	```yml
 	# spring-social/src/main/resources/application.yml
 	spring:
-	    datasource:
-	        url: jdbc:mysql://localhost:3306/spring_social?useSSL=false
-	        username: <YOUR_DB_USERNAME>
-	        password: <YOUR_DB_PASSWORD>
+		datasource:
+    			url: jdbc:postgresql://localhost:5432/blog
+    			username: <YOUR_DB_USERNAME>
+    			password: <YOUR_DB_PASSWORD>
+
+  	jpa:
+    		show-sql: true
+    		hibernate:
+      			ddl-auto: update
+      			naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    		properties:
+      			hibernate:
+        			dialect: org.hibernate.dialect.PostgreSQLDialect
 	```
 
 + **Specify OAuth2 Provider ClientId's and ClientSecrets**
