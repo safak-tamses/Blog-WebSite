@@ -24,7 +24,7 @@ class Login extends Component {
             }, 100);
         }
     }
-    
+
     render() {
         if(this.props.authenticated) {
             return <Redirect

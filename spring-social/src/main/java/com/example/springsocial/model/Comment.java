@@ -3,6 +3,8 @@ package com.example.springsocial.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
+
 @Getter
 @Setter
 @Builder
@@ -14,7 +16,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String content;
+    private String comment;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
@@ -23,4 +25,6 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "users_id")
     private User user;
+
+    private Date commentDate;
 }

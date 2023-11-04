@@ -1,0 +1,40 @@
+/* Post bileşeni için stiller */
+
+.blog-container {
+    text-align: center;
+  }
+
+  .post {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .post h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .post p {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .pagination {
+    margin-top: 20px;
+  }
+
+  .pagination button {
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }

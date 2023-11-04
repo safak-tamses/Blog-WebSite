@@ -64,16 +64,16 @@ class SignupForm extends Component {
 
     handleInputChange(event) {
         const target = event.target;
-        const inputName = target.name;        
+        const inputName = target.name;
         const inputValue = target.value;
 
         this.setState({
             [inputName] : inputValue
-        });        
+        });
     }
 
     handleSubmit(event) {
-        event.preventDefault();   
+        event.preventDefault();
 
         const signUpRequest = Object.assign({}, this.state);
 
@@ -82,7 +82,7 @@ class SignupForm extends Component {
             Alert.success("You're successfully registered. Please login to continue!");
             this.props.history.push("/login");
         }).catch(error => {
-            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');            
+            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });
     }
 
@@ -90,24 +90,24 @@ class SignupForm extends Component {
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="form-item">
-                    <input type="text" name="name" 
+                    <input type="text" name="name"
                         className="form-control" placeholder="Name"
                         value={this.state.name} onChange={this.handleInputChange} required/>
                 </div>
                 <div className="form-item">
-                    <input type="email" name="email" 
+                    <input type="email" name="email"
                         className="form-control" placeholder="Email"
                         value={this.state.email} onChange={this.handleInputChange} required/>
                 </div>
                 <div className="form-item">
-                    <input type="password" name="password" 
+                    <input type="password" name="password"
                         className="form-control" placeholder="Password"
                         value={this.state.password} onChange={this.handleInputChange} required/>
                 </div>
                 <div className="form-item">
                     <button type="submit" className="btn btn-block btn-primary" >Sign Up</button>
                 </div>
-            </form>                    
+            </form>
 
         );
     }

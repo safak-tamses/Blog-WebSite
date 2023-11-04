@@ -39,10 +39,10 @@ public class User {
     private AuthProvider provider;
 
     private String providerId;
-    /* Kullanıcı post */
+
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Post> posts;
-    /* Kullanıcı yorumları */
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Comment> comments;
 

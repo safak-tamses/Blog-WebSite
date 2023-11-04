@@ -3,8 +3,8 @@ import {
     Route,
     Redirect
   } from "react-router-dom";
-  
-  
+
+
 const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
     <Route
       {...rest}
@@ -22,5 +22,5 @@ const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
       }
     />
 );
-  
+
 export default PrivateRoute
