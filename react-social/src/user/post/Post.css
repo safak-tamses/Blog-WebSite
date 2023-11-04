@@ -34,7 +34,12 @@
     cursor: pointer;
   }
 
+  .pagination button:hover {
+    background-color: #1066c2;
+  }
+
   .pagination button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
   }
+

@@ -67,7 +67,7 @@ public class PostService {
 
     public GenericResponse<List<PostResponse>> getPaginatedPosts(int pageNumber, int pageSize) {
         try {
-            PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize, Sort.by("releaseDate"));
+            PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize, Sort.by(Sort.Order.desc("releaseDate")));
 
             Page<Post> page = postRepository.findAll(pageRequest);
 
