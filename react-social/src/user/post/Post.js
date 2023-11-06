@@ -89,30 +89,24 @@ class Post extends Component {
       <div className="blog-container">
         <h1>Blog Sayfası</h1>
         {posts.map((post) => (
-          <div className="post" key={post.contentId}>
-            <h2>{post.contentTitle}</h2>
-            <p>{post.content}</p>
-            <p>Yazar: {post.contentAuthorName}</p>
-            <p>Kategori: {post.contentCategory}</p>
-            <p>Yorum Sayısı: {post.numberOfCommentsOfTheContent}</p>
-            <p>
-              Yayın Tarihi:{" "}
-              {new Date(post.contentReleaseDate).toLocaleString()}
-            </p>
-          </div>
+          <button className="post" key={post.contentId}>
+              <h2>{post.contentTitle}</h2>
+              <p>{post.content}</p>
+              <p>Yazar: {post.contentAuthorName}</p>
+              <p>Kategori: {post.contentCategory}</p>
+              <p>Yorum Sayısı: {post.numberOfCommentsOfTheContent}</p>
+              <p>
+                Yayın Tarihi:{" "}
+                {new Date(post.contentReleaseDate).toLocaleString()}
+              </p>
+          </button>
         ))}
 
         <div className="pagination">
-          <button
-            onClick={this.loadPreviousPage}
-            disabled={pageNumber === 1}
-          >
+          <button onClick={this.loadPreviousPage} disabled={pageNumber === 1}>
             Önceki Sayfa
           </button>
-          <button
-            onClick={this.loadNextPage}
-            disabled={isNextButtonDisabled}
-          >
+          <button onClick={this.loadNextPage} disabled={isNextButtonDisabled}>
             Sonraki Sayfa
           </button>
         </div>

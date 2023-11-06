@@ -1,14 +1,29 @@
-/* Post bileşeni için stiller */
 
 .blog-container {
     text-align: center;
+    align-items: center;
   }
 
   .post {
-    border: 1px solid #ccc;
+    border: 1px solid #ffffff;
+    background-color: #fffafa;
     padding: 10px;
     margin: 10px;
+    width: 96%;
+    height: 100%;
+    text-align: left;
+    border: 1px solid #ddd;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    cursor: pointer;
   }
+  
+  .post:hover {
+    background-color: #007BFF;
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  }
+
 
   .post h2 {
     font-size: 20px;
@@ -32,6 +47,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   }
 
   .pagination button:hover {

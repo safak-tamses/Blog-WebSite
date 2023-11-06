@@ -12,6 +12,7 @@ import com.example.springsocial.util.GenericResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -88,4 +89,14 @@ public class CommentService {
             throw new CommentNotFoundException("");
         }
     }
+
+    public List<Comment> getAllCommentsForPost(Long postId) {
+        try {
+            return commentRepository.findAllByPostId(postId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
 }

@@ -1,8 +1,11 @@
 package com.example.springsocial.service;
 
 import com.example.springsocial.exception.PostNotFoundException;
+import com.example.springsocial.model.Comment;
 import com.example.springsocial.model.Post;
 import com.example.springsocial.model.User;
+import com.example.springsocial.payload.CommentDetailsResponse;
+import com.example.springsocial.payload.PostDetailsResponse;
 import com.example.springsocial.payload.PostRequest;
 import com.example.springsocial.payload.PostResponse;
 import com.example.springsocial.repository.PostRepository;
@@ -58,7 +61,7 @@ public class PostService {
             List<Post> postsOnPage = sortedPostList.subList(fromIndex, toIndex);
             List<String> titles = postsOnPage.stream().map(Post::getTitle).collect(Collectors.toList());
 
-            return new GenericResponse<>(titles,Boolean.TRUE);
+            return new GenericResponse<>(titles, Boolean.TRUE);
         } catch (Exception e) {
             throw new PostNotFoundException("");
         }
@@ -83,7 +86,7 @@ public class PostService {
                     ))
                     .collect(Collectors.toList());
 
-            return new GenericResponse<>(postResponses,Boolean.TRUE);
+            return new GenericResponse<>(postResponses, Boolean.TRUE);
         } catch (Exception e) {
             throw new PostNotFoundException("");
         }
@@ -116,11 +119,33 @@ public class PostService {
                     ))
                     .collect(Collectors.toList());
 
-            return new GenericResponse<>(postResponses,Boolean.TRUE);
+            return new GenericResponse<>(postResponses, Boolean.TRUE);
         } catch (Exception e) {
             throw new PostNotFoundException("");
         }
     }
+
+    public GenericResponse<PostDetailsResponse> showPostDetails(Long postId) {
+        Post post = findPostById(postId);
+        List<CommentDetailsResponse> commentDetailsResponseList = post.getComments().stream()
+                .map(comment -> new CommentDetailsResponse(
+                        comment.getUser().getName(),
+                        comment.getComment(),
+                        comment.getCommentDate()
+                )).collect(Collectors.toList());
+
+        PostDetailsResponse postDetailsResponse = new PostDetailsResponse(
+                post.getId(),
+                post.getAuthor().getName(),
+                post.getTitle(),
+                post.getContent(),
+                post.getReleaseDate(),
+                post.getCategory(),
+                commentDetailsResponseList
+        );
+        return new GenericResponse<>(postDetailsResponse, Boolean.TRUE);
+    }
+
 
 
 }

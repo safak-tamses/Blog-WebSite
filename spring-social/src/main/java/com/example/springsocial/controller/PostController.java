@@ -2,6 +2,7 @@ package com.example.springsocial.controller;
 
 import com.example.springsocial.exception.ResourceNotFoundException;
 import com.example.springsocial.model.Post;
+import com.example.springsocial.payload.PostDetailsResponse;
 import com.example.springsocial.payload.PostRequest;
 import com.example.springsocial.payload.PostResponse;
 import com.example.springsocial.security.CurrentUser;
@@ -48,4 +49,9 @@ public class PostController {
         return new ResponseEntity<>(postService.showOwnPosts(userPrincipal.getId(),pageNumber,pageSize),HttpStatus.OK);
     }
 
+    @GetMapping("details/{id}")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<GenericResponse<PostDetailsResponse>> getPostDetails(@PathVariable Long id) {
+        return new ResponseEntity<>(postService.showPostDetails(id),HttpStatus.OK);
+    }
 }
