@@ -49,7 +49,7 @@ public class PostController {
         return new ResponseEntity<>(postService.showOwnPosts(userPrincipal.getId(),pageNumber,pageSize),HttpStatus.OK);
     }
 
-    @GetMapping("details/{id}")
+    @GetMapping("detail/{id}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<GenericResponse<PostDetailsResponse>> getPostDetails(@PathVariable Long id) {
         return new ResponseEntity<>(postService.showPostDetails(id),HttpStatus.OK);

@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 url = ""
         ),
         description = "Proje gereksinimlerine github üzerinden ulaşabilirsiniz.",
-        title = "File Manager Service",
+        title = "Spring social",
         version = "1.0",
         license = @License(
                 name = "Licence name",

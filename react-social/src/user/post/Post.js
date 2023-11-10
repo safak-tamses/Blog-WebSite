@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { getAllPosts } from "../../util/APIUtils";
+import { getAllPosts, getPostDetail } from "../../util/APIUtils";
 import "./Post.css";
+import PostDetail from "./PostDetail";
 
 class Post extends Component {
   constructor(props) {
@@ -10,6 +11,9 @@ class Post extends Component {
       pageNumber: 1,
       pageSize: 2,
       isNextButtonDisabled: false,
+      selectedPostId: null,
+      postDetail: null,
+      isModalOpen: false,
     };
   }
 
@@ -82,34 +86,96 @@ class Post extends Component {
     );
   };
 
+  showPortDetail = (postId) => {
+    getPostDetail(postId)
+      .then((response) => {
+        this.setState({
+          selectedPostId: postId,
+          postDetail: response.data,
+          isModalOpen: true,
+        });
+      })
+      .catch((error) => {
+        console.error("Gönderiler alınamadı: ", error);
+      });
+  };
+
+  clearPostDetail = () => {
+    this.setState({
+      selectedPostId: null,
+      postDetail: null,
+      isModalOpen: false,
+    });
+  };
+
   render() {
-    const { posts, pageNumber, isNextButtonDisabled } = this.state;
+    const {
+      posts,
+      pageNumber,
+      isNextButtonDisabled,
+      selectedPostId,
+      postDetail,
+      isModalOpen,
+    } = this.state;
 
     return (
       <div className="blog-container">
         <h1>Blog Sayfası</h1>
-        {posts.map((post) => (
-          <button className="post" key={post.contentId}>
-              <h2>{post.contentTitle}</h2>
-              <p>{post.content}</p>
-              <p>Yazar: {post.contentAuthorName}</p>
-              <p>Kategori: {post.contentCategory}</p>
-              <p>Yorum Sayısı: {post.numberOfCommentsOfTheContent}</p>
-              <p>
-                Yayın Tarihi:{" "}
-                {new Date(post.contentReleaseDate).toLocaleString()}
-              </p>
-          </button>
-        ))}
+        {!isModalOpen && (
+          <div>
+            {posts.map((post) => (
+              <button
+                className="post"
+                key={post.contentId}
+                onClick={() => {
+                  this.showPortDetail(post.contentId);
+                }}
+              >
+                <h2>{post.contentTitle}</h2>
+                <p>{post.content}</p>
+                <p>Yazar: {post.contentAuthorName}</p>
+                <p>Kategori: {post.contentCategory}</p>
+                <p>Yorum Sayısı: {post.numberOfCommentsOfTheContent}</p>
+                <p>
+                  Yayın Tarihi:{" "}
+                  {new Date(post.contentReleaseDate).toLocaleString()}
+                </p>
+              </button>
+            ))}
 
-        <div className="pagination">
-          <button onClick={this.loadPreviousPage} disabled={pageNumber === 1}>
-            Önceki Sayfa
-          </button>
-          <button onClick={this.loadNextPage} disabled={isNextButtonDisabled}>
-            Sonraki Sayfa
-          </button>
-        </div>
+            <div className="pagination">
+              <button
+                onClick={this.loadPreviousPage}
+                disabled={pageNumber === 1}
+              >
+                Önceki Sayfa
+              </button>
+              <button
+                onClick={this.loadNextPage}
+                disabled={isNextButtonDisabled}
+              >
+                Sonraki Sayfa
+              </button>
+            </div>
+          </div>
+        )}
+
+        {isModalOpen && (
+          <div className="modal" onClick={this.clearPostDetail}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <div className="butonCloseAll">
+                <button onClick={this.clearPostDetail} className="closeButton">
+                  Close
+                </button>
+              </div>
+              <PostDetail
+                data={postDetail}
+                responseDate={new Date().toLocaleString()}
+                isSuccess={true}
+              />
+            </div>
+          </div>
+        )}
       </div>
     );
   }

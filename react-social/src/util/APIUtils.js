@@ -63,3 +63,10 @@ export function getAllPosts(pageSize, pageNumber) {
     method: "GET",
   });
 }
+
+export function getPostDetail(postId) {
+  return request({
+    url: API_BASE_URL + "/user/post/detail/" + postId,
+    method: "GET",
+  });
+}
